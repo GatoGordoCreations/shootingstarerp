@@ -1,0 +1,88 @@
+<div class="lrBorder">
+
+    <h3 id="title">Advanced Person Search</h3>
+
+    <div class="grid_container">
+        <div class="input">
+            <form>
+                <div class="search_grid">
+                    <div id="radio">
+                        <input id="searchAll" type="radio" name="searchParam" checked="checked">
+                        <label for="searchAll" class="inputFont">Search All</label>
+                        
+                        <br>
+                        <input id="searchCust" type="radio" name="searchParam">
+                        <label for="searchCust" class="inputFont">Search Customers</label>
+                        
+                        <br>
+                        <input id="searchVendors" type="radio" name="searchParam">
+                        <label for="searchVendors" class="inputFont">Search Vendors</label>
+                        
+
+                    </div>
+                    <div id="details">
+                        <label for="firstName" class="input_font">First Name: </label>
+                        <input id="firstName" type="text" class="input_box"/> 
+                        <label for="middleInit" class="input_font"> M: </label>
+                        <input id="middleInit" type="text" maxlength='1' id="middleInit" class="input_box"/>
+                        <label for="lastName" class="input_font"> Last Name: </label>
+                        <input id="lastName" type="text" class="input_box"/>
+                        <br>
+                        <label for="phone_first" class="input_font">Phone Number: </label>
+                        <input 
+                            #phone_first 
+                            id="phone_first" 
+                            type="tel" 
+                            maxlength='3' 
+                            pattern="[0-9]{3}" 
+                            (keyup)="moveOn($event, phone_first, phone_second)"
+                            class="input_box">
+                        <label for="phone_second" class="input_font"></label>
+                        <p class="phone_dash input_font">-</p>
+                        <input 
+                            #phone_second 
+                            id="phone_second" 
+                            type="tel" 
+                            maxlength='3' 
+                            pattern="[0-9]{3}" 
+                            (keyup)="moveOn($event, phone_second, phone_third)"
+                            class="input_box"/>
+                            
+                        <label for="phone_third" class="input_font"></label>
+                        <p class="phone_dash input_font">-</p>
+                        <input 
+                            #phone_third 
+                            id="phone_third" 
+                            type="tel" 
+                            maxlength='4' 
+                            pattern="[0-9]{4}" 
+                            class="input_box">
+                        
+                        <label for="email" class="input_font">Email: </label>
+                        <input id="email" class="input_box" type="email"/>
+
+                        <label for="organization" class="input_font">Organization: </label>
+                        <input id="organization" class="input_box" type="text"/>
+
+                        <input type="submit" value="Search"/>
+                        <input type="reset" value="Reset"/>
+
+
+
+                        
+
+                    </div>
+                </div>
+                
+            </form>    
+        </div>         
+               
+        <div class="output"></div>
+    </div>
+
+     
+</div>
+
+
+
+

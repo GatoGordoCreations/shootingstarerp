@@ -1,0 +1,103 @@
+#title {
+    color: var(--dark-font);
+}
+#byline {
+    color: var(--dark-font);
+    font-style:italic;
+}
+
+.grid_container { 
+    display: grid;
+    width: 100%;
+    height: 650px;
+    grid-template-areas:
+        ". a . b ." 
+        ". a . b .";
+    gap: 10px;
+    grid-template-rows: 100px 1fr 100px 1fr 50px;
+    
+    
+    
+}
+
+.colA {
+    grid-area: a;
+    border-right: 4px solid lightgray;
+}
+
+.colB {
+    grid-area: b;
+    
+    padding-left: 20px;
+}
+
+.grid_container input {
+    margin-bottom: 15px;
+}
+
+.big_marg {
+    margin-top: 40px;
+}
+
+#phoneA {
+    width: 35px;
+    margin-left: 4px;
+}
+
+#phoneB {
+    width: 35px;
+}
+
+#phoneC {
+    width: 45px;
+}
+
+#ext {
+    width: 55px;
+}
+#ext_label {
+    margin-left:3px;
+}
+.dashes {
+    color: var(--dark-font);
+    display: inline;
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+#middleInit {
+    margin-left: 2px;
+    width: 25px;
+}
+#lastName {
+    margin-left: 2px;
+}
+
+#address1 {
+    width: 400px;
+}
+
+#address2 {
+    width: 400px;
+}
+
+#zip {
+    margin-top: 15px;
+    width: 90px;
+}
+
+#personType {
+    width: 175px;
+}
+
+#top_margin {
+    margin-top: 200px;
+    
+}
+
+#submit {
+    margin-right: 15px;
+}
+

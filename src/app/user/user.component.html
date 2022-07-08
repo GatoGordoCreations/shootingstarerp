@@ -1,0 +1,11 @@
+<div>
+    <label for="selectedUser" class="nav__label">User:</label>
+    <select name="selectedUser" (change)="update($event)"> 
+        <option value="{{user}}" selected disabled>
+            {{ user }}
+        </option>
+        <option *ngFor="let user of nameArray" [value]="user.name" class="dropdown">
+            {{ user.name }}
+        </option>
+    </select>
+</div>

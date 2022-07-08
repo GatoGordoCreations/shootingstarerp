@@ -1,0 +1,89 @@
+<div class="profile_box">
+    <div class='grid_container'>
+        <span id="sec_pic">
+            <div class="pic_background">
+                <i class="bi bi-camera camera_icon"></i>
+            </div>
+        </span>
+        <span id="sec_name">
+            <div class="name">
+                <h3>{{ name }}</h3>
+                <p> {{ id }}</p>
+            </div>
+            
+        </span>
+        <span id="sec_type">
+            <div class="type">
+                <h3>{{ type }}</h3>
+                <p>{{ subType }}</p>
+            </div>
+            
+        </span>
+        <span id="sec_important">
+            <div class="important_header">
+                <h3>Important Info</h3>
+
+            </div>
+            <div class="important_border">
+                <ul>
+                    <li>Call customer after 2 pm</li>
+                </ul>
+            </div>
+            <div class="important_controls">
+                <select class="important_links">
+                    <option [value]="" selected disabled id="important_links">Important Links</option>
+                    <option>Schedule Appointment</option>
+                    <option>option 2</option>
+                </select>
+                <div class="create_note">Create Note</div>
+            </div>
+
+        </span>
+        <span id="sec_ledger">
+            <div>
+                <ul [ngSwitch]="person_type">
+                    <li
+                        routerLinkActive="active"
+                        routerLink="Contact"
+                        *ngSwitchCase="'Customer'"
+                        class="ledger_tabs"  
+                        >Contact</li>
+                    <li 
+                        routerLinkActive="active"
+                        routerLink="Events"
+                        *ngSwitchCase="'Customer'"
+                        class="ledger_tabs" 
+                        >Events</li>
+                    <li 
+                        routerLinkActive="active"
+                        routerLink="Notes"
+                        *ngSwitchCase="'Customer'"
+                        class="ledger_tabs" 
+                        >Notes</li>
+                    <li 
+                        *ngSwitchCase="'Vendor'"
+                        class="ledger_tabs" 
+                        >Other 1</li>
+                    <li 
+                        *ngSwitchCase="'Vendor'"
+                        class="ledger_tabs" 
+                        >Other 2</li>
+                </ul>
+            </div>
+            <div class="ledger_content">
+                <div class="ledger_scroll">
+                    <router-outlet></router-outlet>
+                </div>
+                
+
+            </div>
+            
+
+        </span>
+
+
+    </div>
+
+
+
+</div>

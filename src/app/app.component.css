@@ -1,0 +1,9 @@
+
+
+.mainContent {
+    
+    width: var(--main-content-width);
+    height: 775px;
+    margin:auto;
+}
+    

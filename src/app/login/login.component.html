@@ -1,0 +1,33 @@
+
+<div class="background">
+    
+    <div class="loginBox">
+        <form #f="ngForm" (ngSubmit)="signIn(f.value)">
+            <h2>LOGIN</h2>
+               
+            <label for="inputUsername">Username</label>
+            <br>
+            <input 
+                type="text" 
+                id="inputUsername" 
+                name="username" 
+                ngModel/>
+            <br>
+            <div *ngIf="invalidLogin==true" class="error">Invalid username and/or password.</div>
+            <br>
+        
+            <label for="inputPassword">Password</label>
+            <br>
+            <input
+                type="password" 
+                id="inputPassword"
+                name="password"
+                ngModel/>
+            <br>
+        
+            <button type="submit">Sign in</button>
+        
+        </form>
+    </div>
+    
+</div>

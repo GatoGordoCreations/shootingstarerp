@@ -1,0 +1,23 @@
+.card {
+    background-color: var(--card-color-yellow);
+
+}
+
+.card__title {
+    margin: 0px;
+    font-size: 24pt;
+    font-weight: bolder;
+    color: var(--dark-font);
+
+}
+
+.card__header{
+    height:15%;
+}
+
+.card__body {
+    height: 70%;
+    background-color: rgba(255,255,255,.3);
+    
+
+}

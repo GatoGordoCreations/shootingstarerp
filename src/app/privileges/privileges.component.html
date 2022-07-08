@@ -1,0 +1,15 @@
+
+<div>
+    <label for="privilagesDropdown" class="nav__label"> Privileges: </label>
+    <select name="privilagesDropdown" (change)="update($event)">
+        <option [value]="privileges[0].id" selected disabled>
+            {{privileges[0].name}}
+        </option>
+        <option *ngFor="let p of privileges" [value]="p.name" class="dropdown">
+            {{ p.name }}
+        </option>
+    </select>
+</div>
+
+
+   

@@ -1,0 +1,72 @@
+.navBar {
+    background-color: var(--featured-color);
+    width: 100%;
+    height: 45px;
+ 
+}
+.menu { 
+    width: var(--main-content-width);  
+    display: grid;
+    grid-template-areas:
+        'logo blank icons profile privileges';
+    grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.navBar__item1 {
+    grid-area: logo;
+    display: flex;
+}
+.logo {
+    width: 220px;
+    height: auto;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+
+.navBar__item2 {
+    grid-area: icons;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navBar2__icon {
+    color: var(--primary-color);
+    padding-right: 1rem;
+    padding-bottom: 5px;;
+    cursor: pointer;
+    font-size: 14pt;
+    align-self: flex-end;
+    
+}
+.navBar2__icon:hover {
+    font-size: 20pt;
+}
+
+
+.navBar__item3 {
+    grid-area: profile;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    padding-bottom: 5px;;
+}
+.navBar__item4 {
+    grid-area: privileges;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    padding-bottom: 5px;
+    
+}
+
+
+
+
+
+

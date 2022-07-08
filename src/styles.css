@@ -1,0 +1,105 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons';
+@import 'normalize.css';
+
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #ededed;
+    --featured-color: #0ABAB5;
+    --muted-color: #FAFAFF;
+
+    --dark-font: #606060;
+
+    --main-content-width: 1600px;
+    --card-height: 365px;
+
+
+    --card-color-blue: #dfe2f7;
+    --card-color-red: #f7e0df;
+    --card-color-yellow: #f7f7df;
+    --card-color-green: #e1f7df;
+    --card-color-purple: #f2dff7;
+    --card-color-orange: #f7eedf;
+
+    
+}
+body {
+    background-color: var(--secondary-color);
+    
+}
+
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .card {
+    
+    height: 365px;
+    border-radius: 2px;
+    padding: 10px;
+    border-style:outset;
+    border-color:  rgba(0, 0, 0, .1) rgba(255,255,255,.1) rgba(255,255,255,.1) rgba(0, 0, 0, .1);
+}
+
+.button__border {
+  border-style: groove;
+  border-color: rgba(225,255,255, .6) ;
+  border-radius: 2px;
+  border-width: 3px;
+}
+
+.input__border {
+  border-style:inset;
+  border-color: rgba(0, 0, 0, .3) rgba(255,255,255,.1) rgba(255,255,255,.1) rgba(0, 0, 0, .3);
+  border-width: 2px;
+}
+
+/*******************************  Nav Bar Styles ***************/
+.nav__label {
+  color: var(--primary-color);
+  font-weight: bolder;
+
+}
+
+.dropdown {
+  background-color: var(--featured-color);
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+
+/**************** Search Styles*******************/
+.lrBorder {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 3px solid lightgray;
+  border-right: 3px solid lightgray;
+  height: 770px;
+  
+
+}
+
+/*******************input boxes***************/
+.input_box {
+  border-width: 2px;
+  border-color: lightgray;
+  border-radius: 2px;
+  border-style: solid;
+  
+  
+}
+
+.input_box:focus {
+  border-color:var(--featured-color);
+  outline: none!important;
+  border-width: 1px;
+  box-shadow: 2px 2px 10px 1px rgba(0,0,0,.3);
+}
+
+.input_font {
+  color: var(--dark-font);
+}
+

@@ -1,0 +1,76 @@
+<div class="lrBorder">
+    <h3 id="title">Create Organization</h3>
+    <p id="byline">* indicates required field.</p>
+
+    <div class="grid_container">
+        <div class="colA">
+
+            <label for="orgName" class="input_font">Organization Name: </label>
+            <input id="orgName" type="text" class="input_box">
+
+            <br>
+            
+            <label for="phoneA" class="input_font">Phone Number: </label>
+            
+            <input 
+                #phoneA
+                id="phoneA" 
+                type="tel" 
+                class="input_box" 
+                maxlength='3' 
+                pattern="[0-9]{3}" 
+                (keyup)="moveOn($event, phoneA, phoneB)"/>
+            <p class="dashes">-</p>
+            <label for="phoneB" class="input_font"></label>
+            <input 
+                #phoneB
+                id="phoneB" 
+                type="tel" 
+                class="input_box" 
+                maxlength='3' 
+                pattern="[0-9]{3}" 
+                (keyup)="moveOn($event, phoneB, phoneC)"/>
+            <p class="dashes">-</p>
+            <label for="phoneC" class="input_font"></label>
+            <input 
+                #phoneC
+                id="phoneC" 
+                type="tel" 
+                class="input_box" 
+                maxlength='4' 
+                pattern="[0-9]{4}">
+            
+            <br>
+            <label for="address1" class="input_font big_marg">Address: </label>
+            <br>
+            <input id="address1" type="text" class="input_box" placeholder="Line 1">
+            <br>
+            <label for="address2" class="input_font "></label>
+            <input id="address2" type="text" class="input_box" placeholder="Line 2">
+            <br>
+            <label for="city" class="input_font "></label>
+            <input id="city" type="text" class="input_box" placeholder="City">
+            <br>
+            <select name="state" id="state" class="input_box input_font">
+                <option [value]="" selected disabled id="state_placeholder">
+                    State
+                </option>
+                <option *ngFor="let state of getStates()" [value]="state.abv" >
+                    {{ state.name }}
+                </option>
+            </select>
+            <br>
+            <label for="zip" class="input_font"></label>
+            <input id="zip" type="text" class="input_box" placeholder="ZipCode" maxlength="5">
+
+
+        
+
+
+
+        </div>
+        <div class="colB"></div>
+
+    </div>
+
+</div>

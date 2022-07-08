@@ -1,0 +1,49 @@
+<div class="lrBorder">
+    <h3 id="title">Advanced Organization Search</h3>
+    <div class="grid_container">
+        <div class="input">
+            <form>
+                <div class="search_grid">
+                    <div id="radio">
+                        <input id="searchAll" type="radio" name="searchParam" checked="checked">
+                        <label for="searchAll" class="inputFont">Search All</label>
+                        <br>
+                        
+
+                    </div>
+                    <div id="details">
+                        <label for="name" class="input_font">Organization: </label>
+                        <input id="name" type="text" class="input_box"/> 
+
+                        <label for="state" class="input_font">State: </label>
+                        <select id="state" name="StateDropdown" class="input_box">
+                            <option [value]="" selected disabled>
+                                
+                            </option>
+                            <option *ngFor="let state of getStateList()" [value]="state.abv" >
+                                {{ state.name }}
+                            </option>
+                        </select>
+
+                        <label for="city" class="input_font">City: </label>
+                        <input id="city" type="text" class="input_box"/> 
+
+                        <input type="submit" value="Search"/>
+                        <input type="reset" value="Reset"/>
+                    </div>
+                    
+                </div>
+            </form>
+            
+        </div>
+        <div class="output">
+
+
+        </div>
+
+
+
+
+    </div>
+
+</div>

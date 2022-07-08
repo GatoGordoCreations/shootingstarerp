@@ -1,0 +1,38 @@
+<div class="container_box">
+    <div class="phone inline_block">
+        <div class="underline space_between box_width">
+            <h3 class="inline_block">Phone Numbers:</h3>
+            <i class="bi bi-pencil-square inline_block"></i>
+        </div>
+        
+        <ul>
+            <li *ngFor="let p of phone">{{ p.type }}: ({{ p.number.substring(0,3) }}) {{ p.number.substring(3,6)}}-{{ p.number.substring(6,10) }}</li>
+        </ul>
+    </div>
+    <div class="email inline_block">
+        <div class="underline space_between box_width">
+            <h3 class="inline_block">Email Address:</h3>
+            <i class="bi bi-pencil-square inline_block"></i>
+        
+        </div>
+        <ul>
+            <li *ngFor="let e of email">{{ e.email }}</li>
+        </ul>
+        
+    </div>
+    <div class="address inline_block">
+        <div class="underline space_between box_width">
+            <h3>Address: </h3>
+            <i class="bi bi-pencil-square inline_block"></i>
+        </div>
+        
+        <ul>
+            <li>{{ address.line1 }}</li>
+            <li *ngIf="address.line2.length > 0">{{ address.line2 }}</li>
+            <li>{{ address.city }}, {{address.state}}</li>
+            <li>{{ address.zip}}</li>
+        </ul>
+    </div>
+</div>
+
+
