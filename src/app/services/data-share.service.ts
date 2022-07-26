@@ -8,5 +8,7 @@ export class DataShareService {
 
   InvalidLoginFlag = new Subject;
 
+  IsLoggedIn = new Subject;
+
   constructor() { }
 }

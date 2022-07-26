@@ -1,5 +1,6 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+
 
 
 
@@ -10,23 +11,29 @@ import { UserService } from '../services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor() {
-    var userService=new UserService;
-    this.user = userService.getUser();
+  constructor(private authService: AuthService) {
+    this.user = this.getUser();
   }
   user: String;
-  selected!:String;
-
-  nameArray = [
-    { id: 2, name: 'Log Out'}
-  ];
   
-  update(e: any) {
-    this.selected = e.target.value;
+
+  getUser(): String {
+    let user = this.authService.currentUser().firstName 
+    + " " 
+    + this.authService.currentUser().lastName
+
+    return user;
+  }
+  
+  logout(e: any) {
+    if (e.target.value="logout") {
+      this.authService.logout();
+    }
     
   }
 
   ngOnInit(): void {
+
   }
 
 }

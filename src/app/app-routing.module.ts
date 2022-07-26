@@ -1,3 +1,4 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
 import { CreateOrganizationComponent } from './create-organization/create-organization.component';
@@ -17,8 +18,9 @@ import { LedgerNotesComponent } from './ledger-tabs/ledger-notes/ledger-notes.co
 
 const routes: Routes = [
   { 
-    path: '', redirectTo: 'Login', pathMatch: 'full'
-    
+    path: '', 
+    redirectTo: 'Login', 
+    pathMatch: 'full' 
     
   },
   {
@@ -26,42 +28,49 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'Photographer',
-    component: PhotographerComponent
-  },
-  { 
-    path: 'Sales', 
-    component: SalesComponent
-  },
-  {
-    path: 'Advanced_Person_Search',
-    component: AdvancedPersonSearchComponent
-  },
-  {
-    path: 'Advanced_Organization_Search',
-    component: AdvancedOrganizationSearchComponent
-  },
-  {
-    path: 'Create_Person',
-    component: CreatePersonComponent
-  },
-  {
-    path:'Create_Organization',
-    component: CreateOrganizationComponent
-  },
-  {
-    path: 'Person/:uuid',
-    component: PersonComponent,
+    path: 'Dashboard',
+    component: DashboardComponent,
     children: [
-      { path: '', redirectTo: 'Contact', pathMatch: 'full' },
-      { path: 'Contact', component: LedgerContactComponent},
-      { path: 'Events', component: LedgerEventsComponent},
-      { path: 'Notes', component: LedgerNotesComponent}
+      {
+        path: 'Photographer',
+        component: PhotographerComponent
+      },
+      { 
+        path: 'Sales', 
+        component: SalesComponent
+      },
+      {
+        path: 'Advanced_Person_Search',
+        component: AdvancedPersonSearchComponent
+      },
+      {
+        path: 'Advanced_Organization_Search',
+        component: AdvancedOrganizationSearchComponent
+      },
+      {
+        path: 'Create_Person',
+        component: CreatePersonComponent
+      },
+      {
+        path:'Create_Organization',
+        component: CreateOrganizationComponent
+      },
+      {
+        path: 'Person/:uuid',
+        component: PersonComponent,
+        children: [
+          { path: '', redirectTo: 'Contact', pathMatch: 'full' },
+          { path: 'Contact', component: LedgerContactComponent},
+          { path: 'Events', component: LedgerEventsComponent},
+          { path: 'Notes', component: LedgerNotesComponent}
+        ]
+      },
     ]
   },
   { 
     path: '**', 
-    component: NotFoundComponent}
+    component: LoginComponent
+  }
 ];
 
 @NgModule({

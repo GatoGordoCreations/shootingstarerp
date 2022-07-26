@@ -1,4 +1,4 @@
-import { StateService } from './../services/state.service';
+import { StateService } from '../services/state.service';
 import { Component, OnInit } from '@angular/core';
 import { PhoneTypeService } from '../services/phone-type.service';
 

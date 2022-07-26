@@ -34,6 +34,8 @@ import { LedgerEventsComponent } from './ledger-tabs/ledger-events/ledger-events
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -60,6 +62,7 @@ import { HttpErrorInterceptor } from './http-error-interceptor.service';
     LedgerEventsComponent,
     LedgerNotesComponent,
     LoginComponent,
+    DashboardComponent,
 
   ],
   imports: [
@@ -67,7 +70,8 @@ import { HttpErrorInterceptor } from './http-error-interceptor.service';
     HttpClientModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule
   ],
   providers: [
     PrivilegesService,

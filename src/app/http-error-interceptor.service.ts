@@ -29,7 +29,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
     if(err.status=== 403) {
       this.invalidLogin = true;
       this.dataShareService.InvalidLoginFlag.next(this.invalidLogin);
-      
+      this.dataShareService.IsLoggedIn.next(false);
     //  this.router.navigateByUrl(`/`);
       
     return of();
