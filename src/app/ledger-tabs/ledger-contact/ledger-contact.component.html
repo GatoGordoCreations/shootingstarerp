@@ -6,7 +6,7 @@
         </div>
         
         <ul>
-            <li *ngFor="let p of phone">{{ p.type }}: ({{ p.number.substring(0,3) }}) {{ p.number.substring(3,6)}}-{{ p.number.substring(6,10) }}</li>
+            <li *ngFor="let p of phoneList">{{ p.short_desc }}: ({{ p.phone_num1 }}) {{ p.phone_num2 }}-{{ p.phone_num3 }} {{ p.phone_ext}}  <span *ngIf="p.out_of_service" class="bi bi-check" style="color: red"></span></li>
         </ul>
     </div>
     <div class="email inline_block">
@@ -16,7 +16,7 @@
         
         </div>
         <ul>
-            <li *ngFor="let e of email">{{ e.email }}</li>
+            <li *ngFor="let e of emailList">{{ e.email_addr}} <span *ngIf="e.failed" class="bi bi-check" style="color: red"></span></li>
         </ul>
         
     </div>
@@ -27,10 +27,7 @@
         </div>
         
         <ul>
-            <li>{{ address.line1 }}</li>
-            <li *ngIf="address.line2.length > 0">{{ address.line2 }}</li>
-            <li>{{ address.city }}, {{address.state}}</li>
-            <li>{{ address.zip}}</li>
+            <li *ngFor="let a of addressList"></li>
         </ul>
     </div>
 </div>

@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Address } from '../address';
 import { CONSTANTS } from '../constants';
 
@@ -18,7 +19,22 @@ export class AddressService {
         .append('Authorization', 'Bearer ' + token)
         .append('content-type', 'application/json')  
     }
-    return this.http.post(CONSTANTS.API+'/address/add', JSON.stringify(address), options);
+    return this.http.post(CONSTANTS.API+'/address/add', 
+    JSON.stringify(address), 
+    options);
+  }
+
+  public getAllAddressByEntity_Id(id: number): Observable<any>{
+    let token = localStorage.getItem('token');
+      const options = {
+        headers: new HttpHeaders()
+          .append('Authorization', 'Bearer ' + token)
+          .append('content-type', 'application/json'),
+        params: new HttpParams()
+          .append('id', id)
+      }
+      return this.http.get(CONSTANTS.API+'/address/getbyid', options);
+      
   }
 
 

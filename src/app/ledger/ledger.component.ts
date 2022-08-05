@@ -1,8 +1,11 @@
+import { Person } from './../person';
 import { EntityService } from './../services/entity.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationService } from '../services/organization.service';
 import { PersonService } from '../services/person.service';
+import { Observable } from 'rxjs';
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
 
 
 @Component({
@@ -14,6 +17,7 @@ export class LedgerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
+    private router: Router,
     private personService: PersonService,
     private orgService: OrganizationService,
     private entityService: EntityService) { }
@@ -27,40 +31,74 @@ export class LedgerComponent implements OnInit {
   id: number;
   
   subType = 'Unknown';
-  entity_type = 'Unknown';
+  entity_type: string = 'Unknown';
   ledger_tab = 'null';
 
-  
+
+    
 
   ngOnInit(): void {  
 
-      this.route.queryParams
-        .subscribe( params  => {
-          this.id = +params['id'];
-      
-        this.entityService.getVal(1010844).subscribe(response => {});
-        });  
-
-      
-        
-        
-
-          this.name = this.personService.getName().firstName 
-                      + ' ' 
-                      + this.personService.getName().middleInit
-                      + ' '
-                      + this.personService.getName().lastName;
-          
-          
-
-
-
-          this.subType = this.personService.getName().subType;
-      }
-
-
-
-
-
+    
+    
+    
   
+    this.route.queryParams
+      .subscribe( params  => {
+        this.id = +params['id'];
+
+        //load Contact Route
+        this.router.navigate(['/Dashboard/Ledger/Contact'], { queryParamsHandling: 'preserve' });
+        
+        //populate Entity Type
+        this.entityService.getVal(this.id)
+          .subscribe(
+            (response) => {
+              this.entity_type = response;
+
+              switch(this.entity_type) {
+                case 'Organization': {
+                  this.orgService.getOrg(this.id)
+                    .subscribe(
+                      (orgResp) => {
+                        this.name = orgResp['name'];
+                        
+                      }
+                    );
+                  this.orgService.getSubTypes(this.id)
+                      .subscribe(
+                        (subResp) => {
+                          this.subType = subResp;
+                        }
+                      )
+                  break;
+                }
+
+                case 'Person': {
+                  this.personService.getPerson(this.id)
+                    .subscribe(
+                      (persResp: Person) => {
+                        this.name = persResp['fname'] +  " " + persResp['minit'] + ". " + persResp['lname'];
+                      }
+                    )
+                  this.personService.getPersonSubType(this.id)
+                      .subscribe(
+                        (subResp) => {
+                          this.subType = subResp;
+                        }
+                      )
+                  break;
+                }
+              }//end switch case
+            }
+          ); // end entity type
+
+
+          
+      });// end querry params subscribe
+    
+    
+      
+  }// end ngOnInit
+
 }

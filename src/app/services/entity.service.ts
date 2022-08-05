@@ -16,13 +16,14 @@ export class EntityService {
     let token = localStorage.getItem('token');
     const options = {
       headers: new HttpHeaders()
-        .append('Authorization', 'Bearer ' + token)
-        .append('content-type', 'application/json'),
+        .append('Authorization', 'Bearer ' + token),
       params: new HttpParams()
-        .append('id', id)
+        .append('id', id),
+      responseType: 'text' as 'json'
         
     };
     
-    return this.http.get(CONSTANTS.API+'/entity/val', options)
+    return this.http.get<string>(CONSTANTS.API+'/entity/val', options);
   }
 }
+

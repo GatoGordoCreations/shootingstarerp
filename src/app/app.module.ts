@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { SalesAuthGuard } from './services/sales-auth-guard.service';
 import { DataShareService } from './services/data-share.service';
 import { AuthService } from './services/auth.service';
-import { LedgerContactService } from './services/ledger-contact.service';
+
 import { StateService } from './services/state.service';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,6 +42,7 @@ import { DashboardService } from './Services/dashboard.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { PhotographerAuthGuard } from './services/photographer-auth-guard.service';
+import { EntityService } from './services/entity.service';
 
 
 
@@ -88,12 +89,12 @@ import { PhotographerAuthGuard } from './services/photographer-auth-guard.servic
     StateService,
     PhoneTypeService,
     PersonService,
-    LedgerContactService,
     AuthService,
     AuthGuard,
     SalesAuthGuard,
     AdminAuthGuard,
     PhotographerAuthGuard,
+    EntityService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,

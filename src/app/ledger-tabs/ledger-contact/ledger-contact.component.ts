@@ -1,5 +1,8 @@
-import { LedgerContactService } from './../../services/ledger-contact.service';
+import { AddressService } from './../../services/address.service';
+import { ActivatedRoute } from '@angular/router';
+import { PhoneService } from './../../services/phone.service';
 import { Component, OnInit } from '@angular/core';
+import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'app-ledger-contact',
@@ -8,23 +11,77 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LedgerContactComponent implements OnInit {
 
-  address!: { line1: string, line2: string, city: string, state: string, zip: string};
+  addressList!: { id: number, 
+              entity_id: number,
+              address1: string, 
+              address2: string, 
+              city: string, 
+              state: string, 
+              zipcode: string,
+              unreachable: boolean,
+              active: boolean,
+              begin_date: Date,
+              end_date: Date}[];
 
-  phone!: { type: string, number: string}[];
+  phoneList!: { entity_id: number, 
+            short_desc: string, 
+            phone_num1: string,
+            phone_num2: string,
+            phone_num3: string,
+            phone_ext: string,
+            out_of_service: boolean  }[];
 
-  email!: { email: string }[];
+  emailList!: { id: number,
+            entity_id: number,
+            email_addr: string,
+            failed: boolean,
+            active: boolean,
+            begin_date: Date,
+            end_date: Date }[];
 
-  constructor(private ledgerService: LedgerContactService) { 
-    this.address = ledgerService.getAddress();
-    this.phone = ledgerService.getPhone();
-    this.email = ledgerService.getEmail();
+  id: number;
 
-  }
+
+
+  constructor(
+    private phoneService: PhoneService,
+    private emailService: EmailService,
+    private addressService: AddressService,
+    private route: ActivatedRoute
+    ) { }
 
 
 
   ngOnInit(): void {
-  }
+
+    this.route.queryParams
+      .subscribe( params  => {
+        this.id = +params['id']; 
+
+      this.phoneService.getPhoneList(this.id)
+          .subscribe(
+            (phoneList) => {
+              this.phoneList = phoneList;
+              
+            }
+          )
+      
+      this.emailService.getEmailByEntity_Id(this.id)
+            .subscribe(
+              (emailList) => {
+                this.emailList = emailList;
+              }
+            )
+
+      this.addressService.getAllAddressByEntity_Id(this.id)
+              .subscribe(
+                (addressList) => {
+                  this.addressList = addressList;
+                }
+              )
+      }) // getters based on querry params return
+  } // end INIT
+
 
 
 

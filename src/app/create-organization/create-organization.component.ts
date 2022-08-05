@@ -84,9 +84,11 @@ export class CreateOrganizationComponent implements OnInit {
             eObj.entity_id = id; // assign entity_id from return
             eObj.email_addr = orgData.email;  // assign email form form
             this.emailService.addEmail(eObj)
-              .subscribe((emailData) => {
-                console.log(emailData);
-              })
+              .subscribe(
+                (emailData) => {
+                  console.log(emailData);
+                }
+              );
             
           }
           ////////// Create phone, if one exists
@@ -124,7 +126,9 @@ export class CreateOrganizationComponent implements OnInit {
                 })
             }
           if(response){
-            this.router.navigate(['Dashboard/Ledger', id])
+            this.router.navigate(['Dashboard/Ledger'],
+            { queryParams: {id: id}}
+            );
           }
         }) 
     }

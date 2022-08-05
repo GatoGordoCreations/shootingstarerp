@@ -12,8 +12,11 @@ export class CardOrganizationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  id = 1010844;
+  id = 1010200;
   public search(){
+
+
+
     this.router.navigate(['/Dashboard/Ledger'],
     { queryParams: {id: this.id}}
     );
