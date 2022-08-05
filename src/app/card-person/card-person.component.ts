@@ -10,8 +10,9 @@ export class CardPersonComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  id = 123456;
   onClick() {
-    this.router.navigateByUrl('/Person/123456');
+    this.router.navigate(['Dashboard/Ledger/', this.id]);
   }
 
 

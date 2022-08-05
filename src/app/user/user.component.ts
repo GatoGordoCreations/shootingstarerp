@@ -17,13 +17,7 @@ export class UserComponent implements OnInit {
   user: String;
   
 
-  getUser(): String {
-    let user = this.authService.currentUser().firstName 
-    + " " 
-    + this.authService.currentUser().lastName
-
-    return user;
-  }
+  getUser(): String { return this.authService.currentUser(); }
   
   logout(e: any) {
     if (e.target.value="logout") {

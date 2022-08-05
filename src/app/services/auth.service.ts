@@ -1,3 +1,4 @@
+import { CONSTANTS } from './../constants';
 import { DataShareService } from './data-share.service';
 import { Router } from '@angular/router';
 
@@ -17,14 +18,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private loginURL;
+  invalidLogin!: Boolean;
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
     private router: Router,
     private dss: DataShareService) { 
-    this.loginURL = 'https://www.shootingstarerp.com:8543/auth/login';
+    this.loginURL = CONSTANTS.API+ '/auth/login';
   }
 
-  invalidLogin!: Boolean;
+  
 
 
 
@@ -60,8 +62,6 @@ export class AuthService {
 
     let expirationDate = jwtHelper.getTokenExpirationDate(token!);
     let isExpired = jwtHelper.isTokenExpired(token!);
-    
-    console.log(jwtHelper.decodeToken(token));
 
     return !isExpired;
   }
@@ -70,9 +70,23 @@ export class AuthService {
   // can us 'get' instead of public if want to access in HTML
   public currentUser() {
     let token = localStorage.getItem('token');
-    if (!token) return null;
+    if (!token) return "No User";
 
-    return new JwtHelperService().decodeToken(token);
+    var newToken = new JwtHelperService().decodeToken(token);
+    return newToken.firstName + " " + newToken.lastName;
+  }
+
+  public getRoles(): string[] {
+    let token = localStorage.getItem('token');
+    let err: string[] = ["Role Not Found"];
+    if (!token) return err;
+    let jsonRoles: {id: number, role_name: string}[] = new JwtHelperService().decodeToken(token).roles;
+
+    let roles: string[] = Array();
+    for(let i = 0; i < jsonRoles.length; i++){
+      roles.push(jsonRoles[i].role_name)
+    }
+    return roles;
   }
 
 }

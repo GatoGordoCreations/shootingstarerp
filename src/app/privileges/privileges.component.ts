@@ -1,7 +1,9 @@
-import { AppComponent } from './../app.component';
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PrivilegesService } from '../services/privileges.service';
+import { DashboardService } from '../Services/dashboard.service';
+
+
 
 @Component({
   selector: 'privileges',
@@ -10,22 +12,31 @@ import { PrivilegesService } from '../services/privileges.service';
 })
 export class PrivilegesComponent implements OnInit {
   
-  pService: PrivilegesService;
+  
   selected!: string;
 
   
-  privileges: { id: number, name: string} [];
+  privileges: Array<string>;
 
-  constructor (private router: Router, private privSer:PrivilegesService) {
-    this.pService = new PrivilegesService();
-    this.privileges = this.pService.getPrivileges();
+  
+
+  constructor (private router: Router, 
+    private authService: AuthService, 
+    private dashboardService: DashboardService) 
+    {
+      this.privileges = authService.getRoles();
+      this.selected = this.privileges[0];
+      this.router.navigateByUrl('/Dashboard/'+this.selected);
+      this.dashboardService.setCurrentPrivilege(this.selected)
+
   }
+  
   
   
   update(e: any) {
     this.selected = e.target.value;
-    this.router.navigateByUrl('/'+this.selected);
-    this.privSer.setCurrentPrivilege(this.selected);
+    this.router.navigateByUrl('/Dashboard/'+this.selected);
+    this.dashboardService.setCurrentPrivilege(this.selected);
   }
 
 

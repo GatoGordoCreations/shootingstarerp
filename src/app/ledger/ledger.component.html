@@ -14,7 +14,7 @@
         </span>
         <span id="sec_type">
             <div class="type">
-                <h3>{{ type }}</h3>
+                <h3>{{ entity_type }}</h3>
                 <p>{{ subType }}</p>
             </div>
             
@@ -41,22 +41,25 @@
         </span>
         <span id="sec_ledger">
             <div>
-                <ul [ngSwitch]="person_type">
+                <ul [ngSwitch]="tab_selector">
                     <li
                         routerLinkActive="active"
-                        routerLink="Contact"
+                        routerLink="Contact" 
+                        queryParamsHandling="preserve"
                         *ngSwitchCase="'Customer'"
                         class="ledger_tabs"  
                         >Contact</li>
                     <li 
                         routerLinkActive="active"
                         routerLink="Events"
+                        queryParamsHandling="preserve"
                         *ngSwitchCase="'Customer'"
                         class="ledger_tabs" 
                         >Events</li>
                     <li 
                         routerLinkActive="active"
                         routerLink="Notes"
+                        queryParamsHandling="preserve"
                         *ngSwitchCase="'Customer'"
                         class="ledger_tabs" 
                         >Notes</li>

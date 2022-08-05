@@ -52,3 +52,41 @@
     font-size: 16pt;
     font-weight: bold;
 }
+
+.radio {
+    accent-color: var(--featured-color);
+    margin-bottom:20px;
+}
+
+h3 {
+    color: var(--dark-font);
+}
+
+.warning {
+    text-align: center;
+    color: red;
+    background-color: rgb(250,250,220);
+    margin-top: -5px;
+    width: 98%;
+    margin-left:2px;
+    margin-right:2px;
+    padding:3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-weight: 300;
+
+    
+}
+
+button {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.address {
+    margin-bottom: 5px;
+}
+
+.space-above {
+    margin-top: 5px;
+}

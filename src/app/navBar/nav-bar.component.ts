@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PrivilegesService } from '../services/privileges.service';
+import { DashboardService } from '../Services/dashboard.service';
+
 
 
 
@@ -14,11 +15,11 @@ export class NavBarComponent implements OnInit {
 
   currentPrivilege!: String;
 
-  constructor(private router: Router, private privSer:PrivilegesService) { }
+  constructor(private router: Router,
+    private dashboardService: DashboardService) { }
 
   onClick() {
-    this.currentPrivilege = this.privSer.getCurrentPrivilege();
-    this.router.navigateByUrl('/'+this.currentPrivilege);
+    this.router.navigateByUrl('/Dashboard/'+this.dashboardService.getCurrentPrivilege())
   }
 
   ngOnInit(): void {

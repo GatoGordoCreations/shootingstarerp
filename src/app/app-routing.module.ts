@@ -1,3 +1,6 @@
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { PhotographerAuthGuard } from './services/photographer-auth-guard.service';
+import { AuthGuard } from './services/auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
@@ -7,13 +10,17 @@ import { AdvancedOrganizationSearchComponent } from './advanced-organization-sea
 import { AdvancedPersonSearchComponent } from './advanced-person-search/advanced-person-search.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found.component';
+
 import { PhotographerComponent } from './photographer/photographer.component';
 import { SalesComponent } from './sales/sales.component';
-import { PersonComponent } from './person/person.component';
+
 import { LedgerContactComponent } from './ledger-tabs/ledger-contact/ledger-contact.component';
 import { LedgerEventsComponent } from './ledger-tabs/ledger-events/ledger-events.component';
 import { LedgerNotesComponent } from './ledger-tabs/ledger-notes/ledger-notes.component';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { SalesAuthGuard } from './services/sales-auth-guard.service';
+import { LedgerComponent } from './ledger/ledger.component';
+
 
 
 const routes: Routes = [
@@ -30,14 +37,22 @@ const routes: Routes = [
   {
     path: 'Dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
+        path: 'Administrator',
+        component: AdministratorComponent,
+        canActivate: [AdminAuthGuard]
+      },
+      {
         path: 'Photographer',
-        component: PhotographerComponent
+        component: PhotographerComponent,
+        canActivate: [PhotographerAuthGuard]
       },
       { 
         path: 'Sales', 
-        component: SalesComponent
+        component: SalesComponent,
+        canActivate: [SalesAuthGuard]
       },
       {
         path: 'Advanced_Person_Search',
@@ -56,15 +71,16 @@ const routes: Routes = [
         component: CreateOrganizationComponent
       },
       {
-        path: 'Person/:uuid',
-        component: PersonComponent,
+        path: 'Ledger',
+        component: LedgerComponent,
         children: [
-          { path: '', redirectTo: 'Contact', pathMatch: 'full' },
+        //  { path: '', redirectTo: 'Contact', pathMatch: 'full' },
           { path: 'Contact', component: LedgerContactComponent},
           { path: 'Events', component: LedgerEventsComponent},
           { path: 'Notes', component: LedgerNotesComponent}
         ]
-      },
+      }
+      
     ]
   },
   { 

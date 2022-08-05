@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit{
       .subscribe(result => {
         if (result) {
           this.invalidLogin = false;
-          console.log("Service Response: ", this.authService.currentUser().firstName);
           this.router.navigate(['Dashboard']);
         }
           

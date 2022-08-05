@@ -20,7 +20,7 @@
                             <option [value]="" selected disabled>
                                 
                             </option>
-                            <option *ngFor="let state of getStateList()" [value]="state.abv" >
+                            <option *ngFor="let state of getStateList()" [value]="state.abbreviation" >
                                 {{ state.name }}
                             </option>
                         </select>

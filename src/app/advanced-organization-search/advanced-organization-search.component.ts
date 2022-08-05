@@ -13,7 +13,7 @@ export class AdvancedOrganizationSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getStateList(): { name: string, abv: string}[] {
+  getStateList(): { name: string, abbreviation: string}[] {
     return this.stateService.getStateList();
   }
 }

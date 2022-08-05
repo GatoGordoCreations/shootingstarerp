@@ -77,7 +77,7 @@
                     <option [value]="" selected disabled id="state_placeholder">
                         State
                     </option>
-                    <option *ngFor="let state of getStates()" [value]="state.abv" >
+                    <option *ngFor="let state of getStates()" [value]="state.abbreviation" >
                         {{ state.name }}
                     </option>
                 </select>

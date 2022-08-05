@@ -1,12 +1,13 @@
+import { LedgerComponent } from './ledger/ledger.component';
+
+import { NgModule } from '@angular/core';
+import { SalesAuthGuard } from './services/sales-auth-guard.service';
 import { DataShareService } from './services/data-share.service';
 import { AuthService } from './services/auth.service';
 import { LedgerContactService } from './services/ledger-contact.service';
 import { StateService } from './services/state.service';
-import { PrivilegesService } from './services/privileges.service';
-import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './navBar/nav-bar.component';
@@ -25,7 +26,7 @@ import { AdvancedOrganizationSearchComponent } from './advanced-organization-sea
 import { CreatePersonComponent } from './create-person/create-person.component';
 import { PhoneTypeService } from './services/phone-type.service';
 import { CreateOrganizationComponent } from './create-organization/create-organization.component';
-import { PersonComponent } from './person/person.component';
+
 import { PersonService } from './services/person.service';
 
 import { LedgerNotesComponent } from './ledger-tabs/ledger-notes/ledger-notes.component';
@@ -36,6 +37,13 @@ import { LoginComponent } from './login/login.component';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { DashboardService } from './Services/dashboard.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { PhotographerAuthGuard } from './services/photographer-auth-guard.service';
+
+
 
 
 
@@ -57,12 +65,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AdvancedOrganizationSearchComponent,
     CreatePersonComponent,
     CreateOrganizationComponent,
-    PersonComponent,
     LedgerContactComponent,
     LedgerEventsComponent,
     LedgerNotesComponent,
     LoginComponent,
     DashboardComponent,
+    AdministratorComponent,
+    LedgerComponent
+
 
   ],
   imports: [
@@ -74,12 +84,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     JwtModule
   ],
   providers: [
-    PrivilegesService,
+    DashboardService,
     StateService,
     PhoneTypeService,
     PersonService,
     LedgerContactService,
     AuthService,
+    AuthGuard,
+    SalesAuthGuard,
+    AdminAuthGuard,
+    PhotographerAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,

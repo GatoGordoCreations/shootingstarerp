@@ -6,12 +6,12 @@
     <section class="card__body">
         <p>Search: Name, Phone Number, or Association</p>
         <input type="text" class="card__input input__border">
-        <button class="card__search button__border">Search</button>
+        <button class="card__search button__border" (click)="search()">Search</button>
 
     </section>
     
     <footer class="card__footer">
-        <a routerLink="/Advanced_Organization_Search" class="card__advanced button__border">Advanced Search</a> 
-        <a routerLink="/Create_Organization" class="card__new button__border">Create Organization</a>       
+        <a routerLink="/Dashboard/Advanced_Organization_Search" class="card__advanced button__border">Advanced Search</a> 
+        <a routerLink="/Dashboard/Create_Organization" class="card__new button__border">Create Organization</a>       
     </footer>
 </div>
