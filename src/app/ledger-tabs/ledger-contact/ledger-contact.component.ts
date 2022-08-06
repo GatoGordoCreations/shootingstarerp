@@ -14,7 +14,7 @@ export class LedgerContactComponent implements OnInit {
   addressList!: { id: number, 
               entity_id: number,
               address1: string, 
-              address2: string, 
+              address2: string | null, 
               city: string, 
               state: string, 
               zipcode: string,
@@ -77,6 +77,7 @@ export class LedgerContactComponent implements OnInit {
               .subscribe(
                 (addressList) => {
                   this.addressList = addressList;
+                  console.log(addressList);
                 }
               )
       }) // getters based on querry params return

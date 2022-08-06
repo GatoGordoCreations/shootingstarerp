@@ -27,7 +27,11 @@
         </div>
         
         <ul>
-            <li *ngFor="let a of addressList"></li>
+            <li *ngFor="let a of addressList">
+                <span>{{  a.address1 }}  </span><span *ngIf="a.unreachable" class="bi bi-check" style="color: red"></span><br>
+                <span *ngIf=" a.address2!=null && a.address2!='' ">{{  a.address2 }}<br></span>
+                <span>{{  a.city  }}, {{ a.state }} {{  a.zipcode }}</span><br><br>
+            </li>
         </ul>
     </div>
 </div>
