@@ -83,6 +83,7 @@ import { EntityService } from './services/entity.service';
     FormsModule, 
     ReactiveFormsModule,
     JwtModule
+
   ],
   providers: [
     DashboardService,
