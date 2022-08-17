@@ -7,6 +7,9 @@ export class Address {
     public state: string;
     public zipcode: string;
     public unreachable: boolean;
-    public active: boolean
+    public active: boolean;
+    public begin_date: Date;
+    public end_date: Date;
 
 }
+

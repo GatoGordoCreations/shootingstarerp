@@ -1,0 +1,119 @@
+<main class="main_window">
+    <div class="title_bar title_bar_flex">
+        <h3 mat-dialog-title class="">Edit</h3>
+        <mat-icon cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle class="bi bi-arrows-move icon-size"></mat-icon>
+    </div>
+
+    <section class="edit_existing">
+        <div class="matdialog_grid header_line">
+            <p class="">Address</p>
+            <p class="center_self">Unreachable</p>
+            <p class="center_self">Delete</p>
+            <p class="center_self">Save</p>
+
+        </div>
+        <ul class="no_padding">
+            <li *ngFor="let address of addressList; let index = index;">
+                <form [formGroup]="formExisting[index]" (ngSubmit)="onReplace(index)">
+                    <div class="matdialog_grid">
+                        <div>
+                            <input 
+                                class="address"
+                                formControlName="address1"
+                            />
+                            <input
+                                class="address"
+                                formControlName="address2"
+                            />
+                            <br>
+                            <input
+                                class="city"
+                                formControlName="city"
+                            />
+                            <p class="inline">, </p>
+                            <select
+                                formControlName="state">
+                                <option
+                                    *ngFor="let state of stateList" [ngValue]="state.abbreviation">
+                                    {{ state.name }}
+                                </option>
+                            </select>
+                            <input
+                                class="zipcode"
+                                formControlName="zipcode"  
+                            />
+
+                        </div>
+                        <div class="center_self">
+                            <input
+                                formControlName="unreachable"
+                                type="checkbox"
+                            />
+                        </div>
+                        <div class="delete center_self " (click)="onDelete(index)">
+                            <i class="bi bi-dash-circle "></i>
+                        </div>
+                        <div class="center_self">
+                            <button 
+                                *ngIf="formExisting[index].valid && formExisting[index].dirty" 
+                                mat-dialog type="submit" 
+                                id="save{{index}}" 
+                                class="save-button">Save</button>
+                        </div>                          
+                    </div>
+
+                </form>
+            </li>
+        </ul>    
+    </section>
+    <section class="add_new">
+        <div 
+            class="link_color" 
+            (click)="newAddressBool=true"
+            *ngIf="!newAddressBool">
+            <p class="inline ">Add new address</p> 
+            <i class="bi bi-plus inline plus_size"></i>
+        </div>
+
+        <form *ngIf="newAddressBool" [formGroup]="formNewAddress" (ngSubmit)="onAdd()">
+            <input
+                class="address"
+                formControlName="address1"
+                placeholder="Address Line 1">
+            <input
+                class="address"  
+                formControlName="address2"
+                placeholder="Address Line 2">
+            <br>
+            <input
+                class="city"
+                formControlName="city"
+                placeholder="City">
+            <select
+                placeholder="State"
+                formControlName="state">
+                <option [ngValue]="" disabled selected>State</option>
+                <option
+                    *ngFor="let state of stateList" [ngValue]="state.abbreviation">
+                    {{ state.name }}
+                </option>
+            </select>
+            <input
+                class="zipcode"
+                formControlName="zipcode"
+                placeholder="Zipcode">
+            <button 
+                *ngIf="formNewAddress.valid && formNewAddress.value.state!='State'" 
+                mat-dialog 
+                type="submit" 
+                id="newAddress" 
+                class="save-button"
+                >Save</button>
+        </form>
+
+        <div class="cancel_button">
+            <button mat_dialog mat-dialog-close>Cancel</button>  
+        </div>
+    </section>
+
+</main>

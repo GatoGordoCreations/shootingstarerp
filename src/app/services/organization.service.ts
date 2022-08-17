@@ -1,3 +1,4 @@
+import { Org } from './../org';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -41,16 +42,15 @@ export class OrganizationService {
 
   }
 
-  addOrg(orgData: any): Observable<any> {
+  addOrg(org: Org): Observable<any> {
     let token = localStorage.getItem('token');
     const options = {
-      headers: new HttpHeaders().append('Authorization', 'Bearer ' + token),
-      params: new HttpParams()
-        .append('name', orgData.org_name)
-        .append('type', orgData.organization_type)
-        .append('url', orgData.url)
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json')
+      
     };
-    return this.http.post(CONSTANTS.API+'/organization/add', JSON.stringify(orgData), options)
+    return this.http.post(CONSTANTS.API+'/organization/add', JSON.stringify(org), options)
   }
 
   getOrg(id: number): Observable<any> {

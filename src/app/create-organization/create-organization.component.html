@@ -2,85 +2,89 @@
     <h3 id="title">Create Organization</h3>
     <p id="byline">* indicates required field.</p>
 
-    <form #f="ngForm" (ngSubmit)="createOrg(f.value)">
+    <form [formGroup]="formNewOrg" (ngSubmit)="createOrg()">
         <div class="grid_container">
         
             <div class="colA">
-    
-                <label for="orgName" class="input_font">Organization Name: </label>
-                <input id="orgName" type="text" class="input_box" name="org_name" ngModel>
-    
-                <br>
+                <div formGroupName="org">
+                    <label for="orgName" class="input_font">Organization Name: </label>
+                    <input id="orgName" type="text" class="input_box" formControlName="org_name" >
+                </div>
                 
-                <label for="phoneA" class="input_font">Phone Number: </label>
+                <div formGroupName="phone">
+                    <label for="phoneA" class="input_font">Phone Number: </label>
                 
-                <input 
-                    #phoneA
-                    id="phoneA" 
-                    type="tel" 
-                    class="input_box space-above" 
-                    maxlength='3' 
-                    pattern="[0-9]{3}" 
-                    (keyup)="moveOn($event, phoneA, phoneB)"
-                    name="phone_num1"
-                    ngModel/>
-                <p class="dashes">-</p>
-                <label for="phoneB" class="input_font space-above"></label>
-                <input 
-                    #phoneB
-                    id="phoneB" 
-                    type="tel" 
-                    class="input_box space-above" 
-                    maxlength='3' 
-                    pattern="[0-9]{3}" 
-                    (keyup)="moveOn($event, phoneB, phoneC)"
-                    name="phone_num2"
-                    ngModel/>
-                <p class="dashes">-</p>
-                <label for="phoneC" class="input_font space-above"></label>
-                <input 
-                    #phoneC
-                    id="phoneC" 
-                    type="tel" 
-                    class="input_box space-above" 
-                    maxlength='4' 
-                    pattern="[0-9]{4}"
-                    name="phone_num3"
-                    ngModel>
-
-                <br>
-
-                <label for="orgWebsite" class="input_font space-above">Website: </label>
-                <input id="orgWebsite" type="text" class="input_box space-above" name="url" ngModel>
+                    <input 
+                        #phoneA
+                        id="phoneA" 
+                        type="tel" 
+                        class="input_box space-above" 
+                        maxlength='3' 
+                        pattern="[0-9]{3}" 
+                        (keyup)="moveOn($event, phoneA, phoneB)"
+                        formControlName="phone_num1"
+                        />
+                    <p class="dashes">-</p>
+                    <label for="phoneB" class="input_font space-above"></label>
+                    <input 
+                        #phoneB
+                        id="phoneB" 
+                        type="tel" 
+                        class="input_box space-above" 
+                        maxlength='3' 
+                        pattern="[0-9]{3}" 
+                        (keyup)="moveOn($event, phoneB, phoneC)"
+                        formControlName="phone_num2"
+                        />
+                    <p class="dashes">-</p>
+                    <label for="phoneC" class="input_font space-above"></label>
+                    <input 
+                        #phoneC
+                        id="phoneC" 
+                        type="tel" 
+                        class="input_box space-above" 
+                        maxlength='4' 
+                        pattern="[0-9]{4}"
+                        formControlName="phone_num3"
+                        >
+                </div>
                 
-                <br>
 
-                <label for="orgEmail" class="input_font space-above">Email: </label>
-                <input id="orgEmail" type="text" class="input_box space-above" name="email" ngModel>
+                <div formGroupName="org">
+                    <label for="orgWebsite" class="input_font space-above">Website: </label>
+                    <input id="orgWebsite" type="text" class="input_box space-above" formControlName="url">
+                </div>
 
-                <br>
+                <div formGroupName="email">
+                    <label for="orgEmail" class="input_font space-above">Email: </label>
+                    <input id="orgEmail" type="text" class="input_box space-above" formControlName="email_addr">
+                </div>
 
-                <label for="address1" class="input_font big_marg address">Address: </label>
-                <br>
-                <input id="address1" type="text" class="input_box address" placeholder="Line 1" name="address1" ngModel>
-                <br>
-                <label for="address2" class="input_font  address"></label>
-                <input id="address2" type="text" class="input_box  address" placeholder="Line 2" name="address2" ngModel>
-                <br>
-                <label for="city" class="input_font  address"></label>
-                <input id="city" type="text" class="input_box  address" placeholder="City" name="city" ngModel>
-                <br>
-                <select name="state" id="state" class="input_box input_font  address" name="state" ngModel>
-                    <option [value]="" selected disabled id="state_placeholder">
-                        State
-                    </option>
-                    <option *ngFor="let state of getStates()" [value]="state.abbreviation" >
-                        {{ state.name }}
-                    </option>
-                </select>
-                <br>
-                <label for="zip" class="input_font  address"></label>
-                <input id="zip" type="text" class="input_box  address" placeholder="ZipCode" maxlength="5" name="zipcode" ngModel/>
+                <div formGroupName="address">
+                    <label for="address1" class="input_font big_marg address">Address: </label>
+                    <br>
+                    <input id="address1" type="text" class="input_box address" placeholder="Line 1" formControlName="address1">
+                    <br>
+                    <label for="address2" class="input_font  address"></label>
+                    <input id="address2" type="text" class="input_box  address" placeholder="Line 2" formControlName="address2">
+                    <br>
+                    <label for="city" class="input_font  address"></label>
+                    <input id="city" type="text" class="input_box  address" placeholder="City" formControlName="city">
+                    <br>
+                    <select name="state" id="state" class="input_box input_font  address" formControlName="state">
+                        <option [ngValue]="" selected disabled id="state_placeholder">
+                            State
+                        </option>
+                        <option *ngFor="let state of statesList" [ngValue]="state.abbreviation" >
+                            {{ state.name }}
+                        </option>
+                    </select>
+                    <br>
+                    <label for="zip" class="input_font  address"></label>
+                    <input id="zip" type="text" class="input_box  address" placeholder="ZipCode" maxlength="5" formControlName="zipcode"/>
+                </div>
+
+                
     
                 
             
@@ -91,13 +95,16 @@
             <div class="colB">
     
                 <h3>Select Organization Type: </h3>
-    
-                <div *ngFor="let type of orgTypes" class="radio">
-                    <label>
-                        <input type="radio" name="organization_type" [value]="type.organization_type" ngModel (change)="resetFlag()"/>
-                        {{ type.short_desc }}
-                    </label>
+                
+                <div formGroupName="org">
+                    <div *ngFor="let type of orgTypes" class="radio">
+                        <label>
+                            <input type="radio" formControlName="organization_type" [value]="type.organization_type" (change)="resetFlag()"/>
+                            {{ type.short_desc }}
+                        </label>
+                    </div>
                 </div>
+                
                 <div *ngIf="type==false" class="warning">
                     <p>Must select an Organization Type!</p>
                 </div>
@@ -105,7 +112,8 @@
                     <p>Must enter an organization Name!</p>
                 </div>
                 <button type="reset" (click)="resetFlag()">Clear</button>
-                <button type="submit">Save</button>
+                <button type="submit" [disabled]="loading$ | async">Save</button>
+                <mat-spinner mode="indeterminate" *ngIf="loading$ | async"></mat-spinner>
     
     
             </div>

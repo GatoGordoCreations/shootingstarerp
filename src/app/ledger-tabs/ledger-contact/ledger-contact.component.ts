@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { PhoneService } from './../../services/phone.service';
 import { Component, OnInit } from '@angular/core';
 import { EmailService } from '../../services/email.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupContactComponent } from '../../ledger-popup/popup-contact/popup-contact.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PopupEmailComponent } from '../../ledger-popup/popup-email/popup-email.component';
+import { PopupAddressComponent } from '../../ledger-popup/popup-address/popup-address.component';
 
 @Component({
   selector: 'app-ledger-contact',
@@ -23,7 +28,10 @@ export class LedgerContactComponent implements OnInit {
               begin_date: Date,
               end_date: Date}[];
 
-  phoneList!: { entity_id: number, 
+  phoneList!: { 
+            id: number,
+            phone_type: string,
+            entity_id: number, 
             short_desc: string, 
             phone_num1: string,
             phone_num2: string,
@@ -47,7 +55,8 @@ export class LedgerContactComponent implements OnInit {
     private phoneService: PhoneService,
     private emailService: EmailService,
     private addressService: AddressService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
     ) { }
 
 
@@ -58,33 +67,99 @@ export class LedgerContactComponent implements OnInit {
       .subscribe( params  => {
         this.id = +params['id']; 
 
-      this.phoneService.getPhoneList(this.id)
+      
+      this.getPhoneData();
+
+      this.getEmailData();
+      
+      this.getAddressData();
+
+      
+      }) // getters based on querry params return
+  } // end INIT
+
+  openPhoneDialog(){
+    const dialogRef = this.dialog.open(
+      PopupContactComponent, 
+      {height: '500px', 
+      width: '900px',
+      data: {
+        phoneList: this.phoneList, 
+        id: this.id}
+      }
+    );
+    dialogRef.afterClosed()
+      .subscribe(
+        (res) => {
+          this.getPhoneData();
+        }
+      );  
+  } // end openPhoneDialog
+
+  openEmailDialog(){
+    const dialogRef = this.dialog.open(
+      PopupEmailComponent,
+      {height: '500px',
+      width: '900px',
+    data: {
+      emailList: this.emailList,
+      id: this.id}
+    }
+  );
+  dialogRef.afterClosed()
+    .subscribe(
+      (res) => {
+        this.getEmailData();
+      }
+    );
+  } // end openEmailDialog
+
+  openAddressDialog(){
+    const dialogRef = this.dialog.open(
+      PopupAddressComponent,
+      {height: '500px',
+      width: '900px',
+        data: {
+        addressList: this.addressList,
+        id: this.id}
+      }
+    );
+    dialogRef.afterClosed()
+      .subscribe(
+        (res) => {
+         this.getAddressData();
+        }
+      );
+  } // end openEmailDialog
+
+
+  getPhoneData(){
+    this.phoneService.getPhoneList(this.id)
           .subscribe(
             (phoneList) => {
               this.phoneList = phoneList;
-              
             }
           )
-      
-      this.emailService.getEmailByEntity_Id(this.id)
+  } //end get phone data
+
+  getEmailData(){
+    this.emailService.getEmailByEntity_Id(this.id)
             .subscribe(
               (emailList) => {
                 this.emailList = emailList;
               }
             )
+  } // end get email data
 
-      this.addressService.getAllAddressByEntity_Id(this.id)
+  getAddressData(){
+    this.addressService.getAllAddressByEntity_Id(this.id)
               .subscribe(
                 (addressList) => {
                   this.addressList = addressList;
-                  console.log(addressList);
                 }
               )
-      }) // getters based on querry params return
-  } // end INIT
 
-
-
+  } // end get address data
 
 
 }

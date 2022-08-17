@@ -1,0 +1,119 @@
+h3 {
+    padding:0px;
+    margin: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+input {
+    margin: 3px;
+}
+
+
+.title_bar {
+    width: 100%;
+    background-color: var(--featured-color);
+    background: linear-gradient(white, var(--featured-color));
+    padding: 5px;
+}
+
+.title_bar_flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.matdialog_grid {
+    display:grid;
+    gap: 5px;
+    grid-template-columns: 400px 90px 90px 90px;
+}
+
+.no_padding {
+    padding: 0;
+}
+
+.center_self {
+    align-self: center;
+    justify-self: center;
+}
+
+.header_line {
+    border-bottom: 2px solid var(--dark-font);
+    margin-bottom: 15px;
+}
+
+.edit_existing {
+    width: 80%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px; 
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+.save-button {
+    background-color: lightsalmon;
+    border-radius: 5px;
+}
+.save-button:hover {
+    cursor: pointer;
+    filter: brightness(85%);
+    color: white;
+    font-weight: 600;;
+}
+
+.save-button:active {
+    border: 1px inset white;
+}
+
+.icon-size {
+    font-size: 16pt;;
+}
+
+.delete:hover {
+    color: var(--featured-color);
+    cursor: pointer;
+}
+
+.delete:active {
+    color: red;
+}
+
+.cancel_button {
+    margin-top: 30px;
+
+}
+
+.cancel_button:hover {
+    cursor: pointer;
+}
+
+.add_new {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.email_input {
+    width: 350px;
+}
+
+.inline {
+    display: inline;
+}
+
+.plus_size {
+    font-size: 16pt;
+}
+
+.link_color {
+    color: var(--dark-font);
+}
+
+.link_color:hover {
+    color: blue;
+    cursor: pointer;
+}

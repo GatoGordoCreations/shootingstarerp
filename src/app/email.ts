@@ -8,5 +8,7 @@ export class Email {
     public entity_id: number;
     public email_addr: string;
     public failed: boolean;
-    public active: boolean; 
+    public active: boolean;
+    public begin_date: Date;
+    public end_date: Date; 
 }

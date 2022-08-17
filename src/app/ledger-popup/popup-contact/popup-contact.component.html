@@ -1,0 +1,168 @@
+<main class="main_window">
+    <div class="title_bar title_bar_flex">
+        <h3 mat-dialog-title class="">Edit</h3>
+        <mat-icon cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle class="bi bi-arrows-move icon-size"></mat-icon>
+    </div>
+    
+    
+    <section class="edit_existing">
+        <div class="matdialog_grid header_line">
+            <p class="center_self">Type</p>
+            <p class="center_self"></p>
+            <p class="center_self">Phone</p>
+            <p class="center_self"></p>
+            <p class="center_self">Extension</p>
+            <p class="center_self">Not In Service</p>
+            <p class="center_self">Delete</p>
+            <p class="center_self">Save</p>
+
+        </div>
+        <ul class="no_padding">
+            <li *ngFor="let num of phoneList; let index = index;">
+                <form [formGroup]="formArray[index]" (ngSubmit)="onReplace(index)">
+                    <div class="matdialog_grid">
+                        <div class="phone_type center_self">
+                            <select 
+                            name="phone_type" 
+                            formControlName="phone_type"
+                            (change)="changeDetected(index)"
+                            >
+                            <option [ngValue]="num.phone_type">{{ num.short_desc }}</option>
+                            <option *ngFor="let type of phoneTypes" [ngValue]="type.phone_type">
+                                {{type.short_desc}}
+                            </option>
+                        </select>
+                        </div>
+                        <div class="phone_num1 center_self">
+                            <input 
+                            #phone_num1
+                            name="phone_num1"
+                            formControlName="phone_num1"
+                            class="phoneInput3"
+                            (keyup)="changeDetected(index)"
+                            maxLength="3"
+                            />
+                        </div>
+                        <div class="phone_num2 center_self">
+                            <input 
+                            #phone_num2
+                            name="phone_num2"
+                            formControlName="phone_num2"
+                            class="phoneInput3"
+                            (keyup)="changeDetected(index)"
+                            maxLength="3"
+                            />
+                        </div>
+                        <div class="phone_num3 center_self">
+                            <input 
+                            #phone_num3
+                            name="phone_num3"
+                            formControlName="phone_num3"
+                            class="phoneInput4"
+                            (keyup)="changeDetected(index)"
+                            maxLength="4"
+                            />
+                        </div>
+                        <div class="phone_ext center_self">
+                            <input 
+                            #phone_ext
+                            *ngIf="this.formArray[index].value.phone_type=='3'"
+                            name="phone_ext"
+                            formControlName="phone_ext"
+                            class="phoneInput5"
+                            (keyup)="changeDetected(index)"
+                            maxLength="5"
+                            />
+                        </div>
+                        <div class="out_of_service center_self">
+                            <input
+                            name="out_of_service"
+                            formControlName="out_of_service"
+                            type="checkbox"
+                            (change)="changeDetected(index)"
+                            />
+                        </div>
+                        <div class="phone_delete center_self" (click)="deletePhoneNum(index)">
+                            <i class="bi bi-dash-circle"></i>
+                        </div>
+                        <div class="center_self">
+                            <button *ngIf="saveArray[index]==true" mat-dialog type="submit" id="save{{index}}" class="save-button">Save</button>
+                        </div>
+                    </div>
+                    
+                    
+                </form>
+            </li>
+        </ul> 
+    </section>
+    <section class="add_new">
+        <div 
+            class="link_color" 
+            (click)="newNumBool=true"
+            *ngIf="!newNumBool">
+            <p class="inline ">Add new number</p> 
+            <i class="bi bi-plus inline plus_size"></i>
+        </div>
+        <form *ngIf="newNumBool" [formGroup]="formNewPhone" (ngSubmit)="onAdd()">
+            <select
+            name="phone_type" 
+            formControlName="phone_type">
+            <option [ngValue]="" selected>Type</option>
+            <option *ngFor="let type of phoneTypes" [ngValue]="type.phone_type">
+                {{type.short_desc}}
+            </option>
+            </select>
+            <input 
+                class="phoneInput3 input_border"
+                formControlName="phone_num1"
+                minLength="3"
+                maxLength="3"
+                />
+            <input 
+                class="phoneInput3 input_border"
+                formControlName="phone_num2"
+                type="text"
+                minLength="3"
+                maxLength="3"
+                />
+            <input
+                class="phoneInput4 input_border" 
+                formControlName="phone_num3"
+                type="text"
+                minLength="4"
+                maxLength="4"
+                />
+            <input 
+                *ngIf="formNewPhone.value.phone_type==3"
+                formControlName="phone_ext"
+                class="phoneInput5 input_border"
+                type="text"
+                minLength="0"
+                maxLength="5"
+                />
+
+            <button 
+                *ngIf="formNewPhone.valid && formNewPhone.value.phone_type!='Type'" 
+                mat-dialog 
+                type="submit" 
+                id="newPhoneNum" 
+                class="save-button"
+                >Save</button>
+        </form>
+        
+
+        <div class="cancel_button">
+            <button mat_dialog mat-dialog-close>Cancel</button>  
+        </div>
+
+    </section>
+           
+
+
+
+    
+
+</main>
+
+
+

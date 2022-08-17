@@ -2,6 +2,7 @@ import { DataShareService } from './../services/data-share.service';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingService } from '../services/loading-service.service';
 
 
 @Component({
@@ -13,10 +14,13 @@ export class LoginComponent implements OnInit{
 
   invalidLogin!: Boolean;  
 
+  loading$ = this.loader.loading$;
+
   constructor ( 
     private router: Router,
     private authService: AuthService,
-    private dataShareService: DataShareService
+    private dataShareService: DataShareService,
+    private loader: LoadingService
   ) {
     this.dataShareService.InvalidLoginFlag.subscribe((res: any) => {
       this.invalidLogin = res;

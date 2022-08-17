@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CONSTANTS } from '../constants';
 import { Phone } from '../phone';
+import { PhoneTypes } from '../PhoneTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,32 @@ export class PhoneService {
       headers: new HttpHeaders()
         .append('Authorization', 'Bearer ' + token)
         .append('content-type', 'application/json')
+      
     }
     return this.http.post(CONSTANTS.API+'/phone/add', JSON.stringify(phone), options);
+  }
+
+  replacePhone(phone: Phone, recordId: number) {
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json'),
+      params: new HttpParams()
+        .append('recordId', recordId)
+    }
+    return this.http.post(CONSTANTS.API+'/phone/replace', JSON.stringify(phone), options);
+  }
+
+  inactivePhone(recordId: number) {
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json'),
+      
+    }
+    return this.http.post(CONSTANTS.API+'/phone/inactive', JSON.stringify(recordId), options);
   }
 
   getPhoneList(id: number): Observable<any> {
@@ -44,5 +69,15 @@ export class PhoneService {
       responseType: 'text' as 'json'
     }
     return this.http.get(CONSTANTS.API+'/phone/get/type', options);
+  }
+
+
+  getAllPhoneTypes(): Observable<Array<PhoneTypes>> {
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token),
+    }
+    return this.http.get<Array<PhoneTypes>>(CONSTANTS.API+'/phonetypes/getall', options);
   }
 }

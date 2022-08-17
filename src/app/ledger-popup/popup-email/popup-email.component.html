@@ -1,0 +1,70 @@
+<main class="main_window">
+    <div class="title_bar title_bar_flex">
+        <h3 mat-dialog-title class="">Edit</h3>
+        <mat-icon cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle class="bi bi-arrows-move icon-size"></mat-icon>
+    </div>
+
+
+    <section class="edit_existing">
+        <div class="matdialog_grid header_line">
+            <p class="">Email Address</p>
+            <p class="center_self">Failed</p>
+            <p class="center_self">Delete</p>
+            <p class="center_self">Save</p>
+
+        </div>
+        <ul class="no_padding">
+            <li *ngFor="let email of emailList; let index = index;">
+                <form [formGroup]="formExisting[index]" (ngSubmit)="onReplace(index)">
+                    <div class="matdialog_grid">
+                        <div>
+                            <input
+                                class="email_input"
+                                formControlName="email_addr"
+                            />
+                        </div>
+                        <div class="center_self">
+                            <input
+                                formControlName="failed"
+                                type="checkbox"
+                            />
+                        </div>
+                        <div class="delete center_self" (click)="onDelete(index)">
+                            <i class="bi bi-dash-circle"></i>
+                        </div>
+                        <div class="center_self">
+                            <button *ngIf="formExisting[index].dirty" mat-dialog type="submit" id="save{{index}}" class="save-button">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </section>
+    <section class="add_new">
+        <div 
+            class="link_color" 
+            (click)="newEmailBool=true"
+            *ngIf="!newEmailBool">
+            <p class="inline ">Add new email</p> 
+            <i class="bi bi-plus inline plus_size"></i>
+        </div>
+        <form *ngIf="newEmailBool" [formGroup]="formNewEmail" (ngSubmit)="onAdd()">
+            <input 
+                class="email_input"
+                type="email"
+                formControlName="email_addr"
+            />
+            <button 
+                *ngIf="formNewEmail.valid" 
+                mat-dialog 
+                type="submit" 
+                id="newEmailNum" 
+                class="save-button"
+                >Save</button>
+        </form>
+        <div class="cancel_button">
+            <button mat_dialog mat-dialog-close>Cancel</button>  
+        </div>
+        
+    </section>
+</main>

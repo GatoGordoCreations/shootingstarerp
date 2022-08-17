@@ -21,11 +21,8 @@ export class StateService {
         .append('Authorization', 'Bearer ' + token)
         .append('content-type', 'application/json')
     }
-    this.http.get(CONSTANTS.API+'/state', options)
-      .subscribe((response) => {
-        this.stateList = response;
-        return this.stateList;
-      })
+    return this.http.get(CONSTANTS.API+'/state', options);
+      
   }
 
   saveAllStates() {

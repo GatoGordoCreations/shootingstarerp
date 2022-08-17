@@ -1,11 +1,12 @@
 import { DataShareService } from './services/data-share.service';
 import { AuthService } from './services/auth.service';
-import { Injectable } from '@angular/core';
+
 
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+
+import { Injectable } from '@angular/core';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
   invalidLogin!: Boolean;
 
   constructor(
-    private router: Router, 
+  
     private authService: AuthService,
     private dataShareService: DataShareService) {}
 

@@ -38,5 +38,31 @@ export class EmailService {
     return this.http.get(CONSTANTS.API+'/email/getbyid', options);
   }
 
+  public replaceEmail(email: Email, recordId: number){
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json'),
+      params: new HttpParams()
+        .append('recordId', recordId)
+    }
+    return this.http.post(
+      CONSTANTS.API+'/email/replace',
+      JSON.stringify(email),
+      options);
+  }
+
+  public inactiveEmail(recordId: number){
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json'),
+      
+    }
+    return this.http.post(CONSTANTS.API+'/email/inactive', JSON.stringify(recordId), options);
+  }
+
 
 }

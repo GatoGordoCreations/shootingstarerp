@@ -6,7 +6,7 @@ import { DataShareService } from './services/data-share.service';
 import { AuthService } from './services/auth.service';
 
 import { StateService } from './services/state.service';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,8 +43,16 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { PhotographerAuthGuard } from './services/photographer-auth-guard.service';
 import { EntityService } from './services/entity.service';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon'
+import { PopupContactComponent } from './ledger-popup/popup-contact/popup-contact.component';
+import { PopupNotesComponent } from './ledger-popup/popup-notes/popup-notes.component'
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PopupEmailComponent } from './ledger-popup/popup-email/popup-email.component';
+import { PopupAddressComponent } from './ledger-popup/popup-address/popup-address.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { NetworkInterceptor } from './interceptors/network.interceptor';
 
 
 
@@ -72,18 +80,26 @@ import { EntityService } from './services/entity.service';
     LoginComponent,
     DashboardComponent,
     AdministratorComponent,
-    LedgerComponent
+    LedgerComponent,
+    PopupContactComponent,
+    PopupNotesComponent,
+    PopupEmailComponent,
+    PopupAddressComponent
 
 
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatDialogModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    JwtModule
-
+    JwtModule,
+    MatIconModule,
+    DragDropModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DashboardService,
@@ -96,10 +112,17 @@ import { EntityService } from './services/entity.service';
     AdminAuthGuard,
     PhotographerAuthGuard,
     EntityService,
+    DragDropModule,
+    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NetworkInterceptor,
+      multi: true,
     },
     DataShareService
   ],
