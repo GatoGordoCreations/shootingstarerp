@@ -112,7 +112,7 @@
                     <p>Must enter an organization Name!</p>
                 </div>
                 <button type="reset" (click)="resetFlag()">Clear</button>
-                <button type="submit" [disabled]="loading$ | async">Save</button>
+                <button type="submit" [disabled]="formNewOrg.controls['org'].invalid || (loading$ | async)">Save</button>
                 <mat-spinner mode="indeterminate" *ngIf="loading$ | async"></mat-spinner>
     
     

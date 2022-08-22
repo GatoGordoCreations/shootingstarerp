@@ -48,7 +48,7 @@ export class PopupContactComponent implements OnInit {
     this.phoneList = this.data.phoneList;
     this.phoneService.getAllPhoneTypes()
       .subscribe(
-        (returnTypes) => {
+        (returnTypes: any) => {
           this.phoneTypes = returnTypes;
           
         }

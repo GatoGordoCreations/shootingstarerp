@@ -85,3 +85,7 @@
     margin-left: -18px;
     margin-right: 2px;
 }
+
+.pointer:hover {
+    cursor: pointer;
+}

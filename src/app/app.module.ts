@@ -24,7 +24,6 @@ import { NavBarFooterComponent } from './navBarFooter/nav-bar-footer.component';
 import { AdvancedPersonSearchComponent } from './advanced-person-search/advanced-person-search.component';
 import { AdvancedOrganizationSearchComponent } from './advanced-organization-search/advanced-organization-search.component';
 import { CreatePersonComponent } from './create-person/create-person.component';
-import { PhoneTypeService } from './services/phone-type.service';
 import { CreateOrganizationComponent } from './create-organization/create-organization.component';
 
 import { PersonService } from './services/person.service';
@@ -104,7 +103,6 @@ import { NetworkInterceptor } from './interceptors/network.interceptor';
   providers: [
     DashboardService,
     StateService,
-    PhoneTypeService,
     PersonService,
     AuthService,
     AuthGuard,

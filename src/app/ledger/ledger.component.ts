@@ -78,7 +78,11 @@ export class LedgerComponent implements OnInit {
                   this.personService.getPerson(this.id)
                     .subscribe(
                       (persResp: Person) => {
-                        this.name = persResp['fname'] +  " " + persResp['minit'] + ". " + persResp['lname'];
+                        if(persResp.minit!=='\u0000'){
+                          this.name = persResp['fname'] +  " " + persResp.minit + ". " + persResp['lname'];
+                        } else { this.name = persResp['fname'] +  " " + persResp['lname']; }
+                        
+                        
                       }
                     )
                   this.personService.getPersonSubType(this.id)

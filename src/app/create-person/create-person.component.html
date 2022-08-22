@@ -2,106 +2,150 @@
     <h3 id="title">Create Person</h3>
     <p id="byline">* indicates required field.</p>
 
-    <form>
+    <form [formGroup]="formNewPerson" (ngSubmit)="createPerson()">
         <div class="grid_container">
             <div class="colA">
-                <label for="firstName" class="input_font ">Name: </label>
-                <br>
-                <input id="firstName" type="text" class="input_box" placeholder="* First Name">
-                
-                <label for="middleInit" class="input_font"></label>
-                <input id="middleInit" type="text" maxlength='1' class="input_box" placeholder="M">
-                
-                <label for="lastName" class="input_font"></label>
-                <input id="lastName" type="text" class="input_box" placeholder="* Last Name">
-                <br>
-
-                <label for="phone_type" class="input_font big_marg">Phone Number: </label>
-                <br>
-                <select name="phone_type" id="phone_type" (change)="onSelected($event)" class="input_box input_font">
-                    <option [value]="getPhoneType()[1].phoneType" selected disabled>Cell</option>
-                    <option *ngFor="let type of getPhoneType()" [value]="type.phoneType" >
-                        {{ type.phoneType }}
-                    </option>
-                </select>
-                <label for="phoneA" class="input_font"></label>
-                
-                <input 
-                    #phoneA
-                    id="phoneA" 
-                    type="tel" 
-                    class="input_box" 
-                    maxlength='3' 
-                    pattern="[0-9]{3}" 
-                    (keyup)="moveOn($event, phoneA, phoneB)"/>
-                <p class="dashes">-</p>
-                <label for="phoneB" class="input_font"></label>
-                <input 
-                    #phoneB
-                    id="phoneB" 
-                    type="tel" 
-                    class="input_box" 
-                    maxlength='3' 
-                    pattern="[0-9]{3}" 
-                    (keyup)="moveOn($event, phoneB, phoneC)"/>
-                <p class="dashes">-</p>
-                <label for="phoneC" class="input_font"></label>
-                <input 
-                    #phoneC
-                    id="phoneC" 
-                    type="tel" 
-                    class="input_box" 
-                    maxlength='4' 
-                    pattern="[0-9]{4}">
-                <span *ngIf="workSelected" id="ext_label">
-                    <label for="ext" class="input_font" id="ext_label">Ext: </label>    
+                <div formGroupName="person">
+                    <label for="firstName" class="input_font ">Name: </label>
+                    <br>
                     <input 
-                        id="ext" 
+                        id="firstName" 
+                        type="text" 
+                        class="input_box" 
+                        placeholder="* First Name"
+                        formControlName="f_name">
+                    
+                    <label for="middleInit" class="input_font"></label>
+                    <input 
+                        id="middleInit" 
+                        type="text" 
+                        maxlength='1' 
+                        class="input_box" 
+                        placeholder="M"
+                        formControlName="m_init">
+                    
+                    <label for="lastName" class="input_font"></label>
+                    <input 
+                        id="lastName" 
+                        type="text" 
+                        class="input_box" 
+                        placeholder="* Last Name"
+                        formControlName="l_name">
+                </div>
+                
+                <div formGroupName="email">
+                    <label for="email" class="input_font">Email: </label>
+                    <br>
+                    <input 
+                        id="email" 
+                        type="email" 
+                        class="input_box" 
+                        placeholder="* Email"
+                        formControlName="email_addr"/>
+                </div>
+
+                <div formGroupName="phone">
+                    <label for="phone_type" class="input_font big_marg">Phone Number: </label>
+                    <br>
+                    <select 
+                        formControlName="phone_type" 
+                        id="phone_type" 
+                        class="input_box input_font">
+                        <option [ngValue]=''>Type</option>
+                        <option *ngFor="let type of phoneTypes" [ngValue]="type.phone_type">
+                            {{type.short_desc}}
+                        </option>
+                    </select>
+                    <label for="phoneA" class="input_font"></label>
+                    
+                    <input 
+                        #phoneA
+                        formControlName="phone_num1"
+                        id="phoneA" 
                         type="tel" 
                         class="input_box" 
-                        maxlength='5' />
-                </span>
-                <br>
+                        maxlength='3' 
+                        pattern="[0-9]{3}" 
+                        (keyup)="moveOn($event, phoneA, phoneB)"/>
+                    <p class="dashes">-</p>
+                    <label for="phoneB" class="input_font"></label>
+                    <input 
+                        #phoneB
+                        formControlName="phone_num2"
+                        id="phoneB" 
+                        type="tel" 
+                        class="input_box" 
+                        maxlength='3' 
+                        pattern="[0-9]{3}" 
+                        (keyup)="moveOn($event, phoneB, phoneC)"/>
+                    <p class="dashes">-</p>
+                    <label for="phoneC" class="input_font"></label>
+                    <input 
+                        #phoneC
+                        formControlName="phone_num3"
+                        id="phoneC" 
+                        type="tel" 
+                        class="input_box" 
+                        maxlength='4' 
+                        pattern="[0-9]{4}">
+                    <span *ngIf="formNewPerson.controls['phone'].value.phone_type == '3'" id="ext_label">
+                        <label for="ext" class="input_font" id="ext_label">Ext: </label>    
+                        <input 
+                            id="ext" 
+                            formControlName="phone_ext"
+                            type="tel" 
+                            class="input_box" 
+                            maxlength='5' />
+                    </span>
+                </div>
 
-                <label for="address1" class="input_font big_marg">Address: </label>
-                <br>
-                <input id="address1" type="text" class="input_box" placeholder="Line 1">
-                <br>
-                <label for="address2" class="input_font "></label>
-                <input id="address2" type="text" class="input_box" placeholder="Line 2">
-                <br>
-                <label for="city" class="input_font "></label>
-                <input id="city" type="text" class="input_box" placeholder="City">
-                <br>
-                <select name="state" id="state" class="input_box input_font">
-                    <option [value]="" selected disabled id="state_placeholder">
-                        State
-                    </option>
-                    <option *ngFor="let state of getStates()" [value]="state.abbreviation" >
-                        {{ state.name }}
-                    </option>
-                </select>
-                <br>
-                <label for="zip" class="input_font"></label>
-                <input id="zip" type="text" class="input_box" placeholder="ZipCode" maxlength="5">
-
+                
+                <div formGroupName="address">
+                    <label for="address1" class="input_font big_marg">Address: </label>
+                    <br>
+                    <input formControlName="address1" id="address1" type="text" class="input_box" placeholder="Line 1">
+                    <br>
+                    <label for="address2" class="input_font "></label>
+                    <input formControlName="address2" id="address2" type="text" class="input_box" placeholder="Line 2">
+                    <br>
+                    <label for="city" class="input_font "></label>
+                    <input formControlName="city" id="city" type="text" class="input_box" placeholder="City">
+                    <br>
+                    <select formControlName="state" id="state" class="input_box input_font">
+                        <option [value]="" selected disabled id="state_placeholder">
+                            State
+                        </option>
+                        <option *ngFor="let state of stateList" [value]="state.abbreviation" >
+                            {{ state.name }}
+                        </option>
+                    </select>
+                    <br>
+                    <label for="zip" class="input_font"></label>
+                    <input formControlName="zipcode" id="zip" type="text" class="input_box" placeholder="ZipCode" maxlength="5">
+                </div>
 
             </div>
 
             <div class="colB">
-                <label for="personType" class="input_font">* Person Type: </label>
-                <br>
-                <select name="personType" id="personType" class="input_box input_font">
-                    <option [value]="" selected disabled></option>
-                    <option value="Customer">Customer</option>
-                    <option value="Vendor">Vendor</option>
-                </select>
+                <div formGroupName="person">
+                    <label for="personType" class="input_font">* Person Type: </label>
+                    <br>
+                    <select formControlName="type" id="personType" class="input_box input_font">
+                        <option [ngValue]='' selected disabled></option>
+                        <option *ngFor="let type of personTypes" [ngValue]="type.person_type" >
+                            {{ type.short_desc }}
+                        </option>
+                        
+                    </select>
+                </div>
+                
 
                 <br>
                 <p id="top_margin"> </p>
                 <span >
-                    <input type="submit" id="submit"/>
-                    <input type="reset"/>
+                    <button [disabled]="formNewPerson.controls['person'].invalid || (loading$ | async)" type="submit" class="submit">Submit</button>
+                    <button type="reset" class="reset">Reset</button>
+                    <mat-spinner mode="indeterminate" *ngIf="loading$ | async"></mat-spinner>
 
                 </span>
 

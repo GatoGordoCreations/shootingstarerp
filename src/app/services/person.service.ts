@@ -25,6 +25,30 @@ export class PersonService {
       options);
   }
 
+  addNewPerson(person: Person) {
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+        .append('content-type', 'application/json')      
+    }
+    return this.http.post(
+      CONSTANTS.API+'/person/addnew',
+      JSON.stringify(person),
+      options);
+  }
+
+  getAllPersonTypes() {
+    let token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders()
+        .append('Authorization', 'Bearer ' + token)
+  }
+  return this.http.get(
+    CONSTANTS.API+'/person/getalltypes',
+    options);
+  }
+
   getPersonSubType(id: number) {
     let token = localStorage.getItem('token');
     const options = {

@@ -2,7 +2,7 @@
     <h3 id="title">Advanced Organization Search</h3>
     <div class="grid_container">
         <div class="input">
-            <form>
+            <form [formGroup]="formSearch" (ngSubmit)="search()">
                 <div class="search_grid">
                     <div id="radio">
                         <input id="searchAll" type="radio" name="searchParam" checked="checked">
@@ -13,23 +13,31 @@
                     </div>
                     <div id="details">
                         <label for="name" class="input_font">Organization: </label>
-                        <input id="name" type="text" class="input_box"/> 
+                        <input formControlName="org_name" id="name" type="text" class="input_box"/> 
 
-                        <label for="state" class="input_font">State: </label>
-                        <select id="state" name="StateDropdown" class="input_box">
+                        <label  for="state" class="input_font">State: </label>
+                        <select id="state" formControlName="state" class="input_box">
                             <option [value]="" selected disabled>
                                 
                             </option>
-                            <option *ngFor="let state of getStateList()" [value]="state.abbreviation" >
+                            <option *ngFor="let state of stateList" [value]="state.abbreviation" >
                                 {{ state.name }}
                             </option>
                         </select>
 
                         <label for="city" class="input_font">City: </label>
-                        <input id="city" type="text" class="input_box"/> 
+                        <input formControlName="city" id="city" type="text" class="input_box"/> 
 
-                        <input type="submit" value="Search"/>
-                        <input type="reset" value="Reset"/>
+                        <button 
+                            [disabled]="
+                                (formSearch.controls['org_name'].invalid &&
+                                formSearch.controls['state'].invalid && 
+                                formSearch.controls['city'].invalid) ||
+                                (loading$ | async)" 
+                                type="submit">Search</button>
+                        <button type="reset">Reset</button>
+                        <mat-spinner mode="indeterminate" *ngIf="loading$ | async"></mat-spinner>
+
                     </div>
                     
                 </div>
@@ -37,6 +45,30 @@
             
         </div>
         <div class="output">
+            <div class="search-grid search-header">
+                <p>Entity Id</p>
+                <p>Type</p>
+                <p>Name</p>
+                <p>City</p>
+                <p>State</p> 
+            </div>
+            <div class="overflow ">
+                <div 
+                    *ngFor="let s of searchReturn; let i = index; let odd = odd" 
+                    [ngClass]="odd ? 'odd' : 'even'" 
+                    class="search-grid"
+                    id="{{ s.entity_id }}"
+                    (mouseenter)="selectRow(s.entity_id)"
+                    (mouseleave)="unselectRow(s.entity_id)"
+                    (click)="openLedger(s.entity_id)">
+                    <p>{{ s.entity_id }}</p>
+                    <p>{{ s.short_desc  }}</p>
+                    <p>{{ s.org_name }}</p>
+                    <p>{{ s.city }}</p>
+                    <p>{{ s.state }}</p>
+                </div>
+            </div>
+            
 
 
         </div>

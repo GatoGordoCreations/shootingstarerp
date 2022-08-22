@@ -4,68 +4,72 @@
 
     <div class="grid_container">
         <div class="input">
-            <form>
+            <form [formGroup]="formSearchPerson" (ngSubmit)="search()">
                 <div class="search_grid">
                     <div id="radio">
-                        <input id="searchAll" type="radio" name="searchParam" checked="checked">
-                        <label for="searchAll" class="inputFont">Search All</label>
+                        
+                        <input id="searchCust" type="radio" formControlName="person_type" name="person_type" checked="checked" value="Customer" class="pointer">
+                        <label for="searchCust" class="inputFont pointer">Search Customer</label>
                         
                         <br>
-                        <input id="searchCust" type="radio" name="searchParam">
-                        <label for="searchCust" class="inputFont">Search Customers</label>
-                        
-                        <br>
-                        <input id="searchVendors" type="radio" name="searchParam">
-                        <label for="searchVendors" class="inputFont">Search Vendors</label>
+                        <input id="searchVendors" type="radio" formControlName="person_type" name="person_type" value="Vendor" class="pointer">
+                        <label for="searchVendors" class="inputFont pointer">Search Vendor</label>
                         
 
                     </div>
                     <div id="details">
                         <label for="firstName" class="input_font">First Name: </label>
-                        <input id="firstName" type="text" class="input_box"/> 
+                        <input id="firstName" type="text" class="input_box" formControlName="f_name"/> 
                         <label for="middleInit" class="input_font"> M: </label>
-                        <input id="middleInit" type="text" maxlength='1' id="middleInit" class="input_box"/>
+                        <input id="middleInit" type="text" maxlength='1' id="middleInit" class="input_box" formControlName="m_init"/>
                         <label for="lastName" class="input_font"> Last Name: </label>
-                        <input id="lastName" type="text" class="input_box"/>
+                        <input id="lastName" type="text" class="input_box" formControlName="l_name"/>
                         <br>
-                        <label for="phone_first" class="input_font">Phone Number: </label>
-                        <input 
-                            #phone_first 
-                            id="phone_first" 
-                            type="tel" 
-                            maxlength='3' 
-                            pattern="[0-9]{3}" 
-                            (keyup)="moveOn($event, phone_first, phone_second)"
-                            class="input_box">
-                        <label for="phone_second" class="input_font"></label>
-                        <p class="phone_dash input_font">-</p>
-                        <input 
-                            #phone_second 
-                            id="phone_second" 
-                            type="tel" 
-                            maxlength='3' 
-                            pattern="[0-9]{3}" 
-                            (keyup)="moveOn($event, phone_second, phone_third)"
-                            class="input_box"/>
-                            
-                        <label for="phone_third" class="input_font"></label>
-                        <p class="phone_dash input_font">-</p>
-                        <input 
-                            #phone_third 
-                            id="phone_third" 
-                            type="tel" 
-                            maxlength='4' 
-                            pattern="[0-9]{4}" 
-                            class="input_box">
+                        <div formGroupName="phone">
+                            <label for="phone_first" class="input_font">Phone Number: </label>
+                            <input 
+                                #phone_first 
+                                id="phone_first" 
+                                type="tel" 
+                                maxlength='3' 
+                                pattern="[0-9]{3}" 
+                                (keyup)="moveOn($event, phone_first, phone_second)"
+                                class="input_box"
+                                formControlName="phone_num1"/>
+                            <label for="phone_second" class="input_font"></label>
+                            <p class="phone_dash input_font">-</p>
+                            <input 
+                                #phone_second 
+                                id="phone_second" 
+                                type="tel" 
+                                maxlength='3' 
+                                pattern="[0-9]{3}" 
+                                (keyup)="moveOn($event, phone_second, phone_third)"
+                                class="input_box"
+                                formControlName="phone_num2"/>
+                                
+                            <label for="phone_third" class="input_font"></label>
+                            <p class="phone_dash input_font">-</p>
+                            <input 
+                                #phone_third 
+                                id="phone_third" 
+                                type="tel" 
+                                maxlength='4' 
+                                pattern="[0-9]{4}" 
+                                class="input_box"
+                                formControlName="phone_num3"/>
+                            </div>
+                        
                         
                         <label for="email" class="input_font">Email: </label>
-                        <input id="email" class="input_box" type="email"/>
+                        <input id="email" class="input_box" type="email" formControlName="email_addr"/>
 
                         <label for="organization" class="input_font">Organization: </label>
-                        <input id="organization" class="input_box" type="text"/>
+                        <input id="organization" class="input_box" type="text" formControlName="org"/>
 
-                        <input type="submit" value="Search"/>
-                        <input type="reset" value="Reset"/>
+                        <button type="submit" value="Search">Search</button>
+                        <button type="reset" value="Reset">Reset</button>
+                        <mat-spinner mode="indeterminate" *ngIf="loading$ | async"></mat-spinner>
 
 
 

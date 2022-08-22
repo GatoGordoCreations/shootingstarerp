@@ -72,12 +72,12 @@ export class PhoneService {
   }
 
 
-  getAllPhoneTypes(): Observable<Array<PhoneTypes>> {
+  getAllPhoneTypes(){
     let token = localStorage.getItem('token');
     const options = {
       headers: new HttpHeaders()
         .append('Authorization', 'Bearer ' + token),
     }
-    return this.http.get<Array<PhoneTypes>>(CONSTANTS.API+'/phonetypes/getall', options);
+    return this.http.get(CONSTANTS.API+'/phonetypes/getall', options);
   }
 }

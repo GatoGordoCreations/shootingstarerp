@@ -97,7 +97,19 @@
     
 }
 
-#submit {
+.submit {
     margin-right: 15px;
+}
+.submit:disabled {
+    border-color: lightgray;
+    color: lightgray;
+    pointer-events: none;
+}
+.submit:hover {
+    cursor: pointer;
+}
+
+.reset:hover {
+    cursor: pointer;
 }
 

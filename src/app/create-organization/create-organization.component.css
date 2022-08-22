@@ -83,6 +83,16 @@ button {
     margin-right: 5px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    border-color: lightgray;
+    color: lightgray;
+    pointer-events: none;
+}
+
 .address {
     margin-bottom: 5px;
 }
